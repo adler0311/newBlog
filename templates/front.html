@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+	{% for post in posts %}
+		<hr>
+		{{ post.render() | safe}}
+	{% endfor %}
+{% endblock %}
+

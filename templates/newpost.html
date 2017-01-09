@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+	<h1>새 글을 작성해보세요.</h1>
+	<form method="post">
+		<label>
+			<h3>제목</h3>
+			<input type="text" name="subject" placeholder="내용을 입력하세요" value={{subject}}>
+		</label>
+		<label>
+			<h3>내용</h3>
+			<textarea rows="5" name="content" placeholder="내용을 입력하세요.">{{content}}</textarea>
+		</label>
+		<div class="error">{{msg}}</div>
+		<input type="submit">
+	</form>
+{% endblock %}

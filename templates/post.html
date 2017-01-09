@@ -1,0 +1,16 @@
+<div class="subject">
+	<h3>제목</h3>
+	<p>{{p.subject}}</p>
+</div>
+<div class="content">
+	<h3>내용</h3>
+	<p>{{p.content}}</p>
+</div>
+<div class="created">
+	<h4>작성시간</h4>
+	<p>{{p.created.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")}}</p>
+</div>
+<div class="modify">
+	<h4><a href="/edit/{{p.key.id()}}">글 수정하기</a></h4>
+	<h4><a href="/delete/{{p.key.id()}}">글 지우기</a></h4>
+</div>
