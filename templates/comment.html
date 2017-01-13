@@ -1,20 +1,18 @@
-<div class="subject">
-	<h3>제목</h3>
-	<p><a href="/postpage/{{p.key.id()}}">{{p.subject}}</a></p>
-</div>
 <div class="content">
 	<h3>내용</h3>
-	<p>{{p._render_text}}</p>
+	<p>{{c._render_text}}</p>
 </div>
 <div class="created">
 	<h4>작성시간</h4>
-	<p>{{p.created.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")}}</p>
+	<p>{{c.created.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")}}</p>
 </div>
 <div class="user">
 	<h4>글쓴이</h4>
-	<p>{{p.user.get().name}}</p>
+	<p>{{c.name}}</p>
 </div>
+<!--
 <div class="modify">
 	<h4><a href="/edit/{{p.key.id()}}">글 수정하기</a></h4>
 	<h4><a href="/delete/{{p.key.id()}}">글 지우기</a></h4>
 </div>
+-->

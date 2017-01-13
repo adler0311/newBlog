@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<form method="post">
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="username" value="{{username}}"></td>
+				<td><div class="error">{{error_username}}</div></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="password"></td>
+				<td><div class="error">{{error_password}}</div></td>
+			</tr>
+			<tr>
+				<td>비밀번호 확인</td>
+				<td><input type="password" name="verify"></td>
+				<td><div class="error">{{error_verify}}</div></td>
+			</tr>
+			<tr>
+				<td>이메일(선택)</td>
+				<td><input type="text" name="email" value="{{email}}"></td>
+				<td><div class="error">{{error_email}}</div></td>
+			</tr>
+		</table>
+		<input type="submit" value="가입하기">
+	</form>
+{% endblock %}

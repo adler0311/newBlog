@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <form method="post">
+        <p>작성 시 입력한 비밀번호를 넣어주세요</p>
+        <input type="password" name="comment_password">
+        <div class="error">{{msg}}</div>
+        <input type="submit" value="확인">
+        <p><a href='/postpage/{{c.post.get().key.id()}}'>취소</a></p>
+    </form>
+</div>
+
+{% endblock %}

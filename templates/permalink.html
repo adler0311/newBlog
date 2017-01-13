@@ -1,8 +1,46 @@
 {% extends "base.html" %}
-{% block head %}
-	{{ super() }}
-{% endblock %}
-
 {% block content %}
-	{{ p.render() | safe }}
+	<div class="container">
+		{{ p.render() | safe }}
+		<hr>
+		<div class="comments">
+			{% for c in comments %}
+				{% if c.get() %}
+				<div class="content">
+					<h4>내용</h4>
+					<p>{{c.get().content}}</p>
+				</div>
+				<div class="created">
+					<h5>작성시간</h5>
+					<p>{{c.get().created.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")}} </p>
+				</div>
+				<div class="user">
+					<h5>글쓴이</h5>
+					<p>{{c.get().name}}</p>
+				</div>
+				<a href="/comment/manage/{{c.id()}}">수정/삭제하기</a>
+				<hr>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<form method="post">
+			<div class="form-group">
+			    <label for="name">이름</label>
+				<input type="text" class="form-control" name="name" placeholder="이름, 또는 닉네임을 입력하세요." style="width:600px">
+				<p>{{error_name}}</p>
+			</div>
+			<div class="form-group">
+			    <label for="password">비밀번호</label>
+			    <input type="password" class="form-control" name="password" placeholder="수정/삭제 시 비밀번호가 필요합니다." style="width:600px">
+			    <p>{{error_password}}</p>
+			</div>
+			<div class="form-group">
+			    <label for="textarea"></label>
+			    <textarea class="form-control" name="content" rows="5" style="width:600px"></textarea>
+			    <p>{{error_content}}</p>
+			</div>
+
+			<button type="submit" class="btn btn-primary">작성 완료</button>
+		</form>
+	</div>
 {% endblock %}
