@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-
 {% block content %}
 <h1>글을 수정해보세요.</h1>
-	<form method="post">
-		<label>
-			<h3>제목</h3>
-			<input type="text" name="subject" placeholder="내용을 입력하세요" value={{post.subject}}>
-		</label>
-		<label>
-			<h3>내용</h3>
-			<textarea rows="5" name="content" placeholder="내용을 입력하세요.">{{post.content}}</textarea>
-		</label>
-		<div class="error">{{msg}}</div>
-		<input type="submit">
-	</form>	
+<form method="post">
+  	<div class="form-group">
+    	<label>제목</label>
+    	<input type="text" class="form-control" name="subject" placeholder="제목을 입력하세요" value={{post.subject}}>
+  	</div>
+  	<div class="form-group">
+    	<label>내용</label>
+    	<textarea class="form-control" name="content" rows="5" placeholder="내용을 입력하세요.">{{post.content}}</textarea>
+  	</div>
+  	<div class="error">{{msg}}</div>
+  	<input type="submit" class="btn btn-primary" value="작성하기">
+</form>
+
 {% endblock %}

@@ -6,23 +6,28 @@
 		<div class="comments">
 			{% for c in comments %}
 				{% if c.get() %}
-				<div class="content">
-					<h4>내용</h4>
-					<p>{{c.get().content}}</p>
+				<div class="comment">
+					<div class="creatednWrittenBy">
+						<p id="comment-user"><strong>{{c.get().name}}</strong></p>
+						<p id="comment-writtenTime">
+							{% if c.get().created.strftime("%Y") == current.strftime("%Y") %}
+								{{c.get().created.strftime("%m월 %d일 %H시 %M분")}}
+							{% else %}
+								{{c.get().created.strftime("%Y년 %m월 %d일 %H시 %M분")}}
+							{% endif %}
+						</p>
+					</div>
+					<a href="/comment/manage/{{c.id()}}" class="btn btn-outline-primary btn-sm">수정/삭제</a>
+					<br>
+					<br>
+					<div class="content">
+						<p>{{c.get().content}}</p>
+					</div>
 				</div>
-				<div class="created">
-					<h5>작성시간</h5>
-					<p>{{c.get().created.strftime("%Y년 %m월 %d일 %H시 %M분 %S초")}} </p>
-				</div>
-				<div class="user">
-					<h5>글쓴이</h5>
-					<p>{{c.get().name}}</p>
-				</div>
-				<a href="/comment/manage/{{c.id()}}">수정/삭제하기</a>
-				<hr>
 				{% endif %}
 			{% endfor %}
 		</div>
+		<hr>
 		<form method="post">
 			<div class="form-group">
 			    <label for="name">이름</label>
@@ -42,5 +47,7 @@
 
 			<button type="submit" class="btn btn-primary">작성 완료</button>
 		</form>
+		<br>
+		<br>
 	</div>
 {% endblock %}

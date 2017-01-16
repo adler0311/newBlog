@@ -5,9 +5,15 @@
     <div class="form-group">
         <textarea class="form-control" name="reply" rows="8">{{c.content}}</textarea>
     </div>
-    <input type="submit" value="확인">
-    <a href="/comment/delete/{{c.key.id()}}">삭제</a>
-    <p><a href='/postpage/{{c.post.get().key.id()}}'>취소</a></p>
+    <div class="buttons">
+    	<div class="col-md-11">
+		    <input type="submit" value="확인" class="btn btn-primary" id="modify-button">
+		    <a href='/postpage/{{c.post.get().key.id()}}' class="btn btn-primary" id="modify-button">취소</a>
+		 </div>
+		 <div class="col-md=1">
+	    	<a href="/comment/delete/{{c.key.id()}}" class="btn btn-primary" id="modify-button">삭제</a>
+	    </div>
+	</div>
 </form>
 </div>
 

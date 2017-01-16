@@ -3,10 +3,14 @@
 <div class="container">
     <form method="post">
         <p>작성 시 입력한 비밀번호를 넣어주세요</p>
-        <input type="password" name="comment_password">
+        <div class="col-3">
+        	<input type="password" name="comment_password" class="form-control" id="manage-form">
+        </div>
         <div class="error">{{msg}}</div>
-        <input type="submit" value="확인">
-        <p><a href='/postpage/{{c.post.get().key.id()}}'>취소</a></p>
+        <div class="buttons">
+	        <input type="submit" class="btn btn-primary btn-sm" value="확인">
+	        <a href='/postpage/{{c.post.get().key.id()}}' class="btn btn-primary btn-sm" id="manage-cancel">취소</a>
+        </div>
     </form>
 </div>
 

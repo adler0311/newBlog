@@ -1,0 +1,107 @@
+body {
+	font-family: 'Jeju Gothic', serif;
+	position: relative;
+	height: 100%;
+}
+
+
+a:hover {
+	text-decoration: none;
+	color: hotpink;
+}
+
+.jumbotron {
+	height: 180px;
+}
+
+.subject {
+	display: flex;
+}
+
+#comment-length {
+	margin-left: 20px;
+	display: flex;
+}
+
+.modify {
+	display: flex;
+}
+
+#creatednUser-el {
+	margin-right: 20px;
+}
+
+.post-el {
+	background-color: #F8F8F8;
+	padding: 0 10px 10px 10px;
+}
+
+.modify {
+	display: flex;
+}
+
+#modify-el {
+	margin-right: 20px;
+}
+
+#hidden {
+	color: #F8F8FF;
+}
+
+.no-button {
+	margin-left: 20px;
+}
+
+.creatednWrittenBy {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#writtenBy {
+	margin-left: 20px;
+}
+
+.comment {
+	border: 1px outset;
+	padding: 10px 10px 10px 10px;
+	margin-bottom: 20px;
+
+}
+
+#comment-writtenTime {
+	margin-left: 20px;
+}
+
+.btn-sm {
+	margin-top:-10px;
+}
+
+#manage-form {
+	margin-left: -15px;
+}
+
+.buttons {
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#manage-cancel {
+	margin-left: 10px;
+}
+
+.error {
+	margin-top: 10px;
+}
+
+#modify-button {
+	margin-right: 10px;
+}
+
+.login-form {
+	margin-left: 20px;
+}
+
+.login-button {
+	margin-top: 10px;
+}

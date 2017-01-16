@@ -25,6 +25,8 @@ import hmac
 from string import letters
 import random
 import hashlib
+import datetime
+
 
 from google.appengine.ext import ndb
 
@@ -34,6 +36,8 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 
 secret = "hrt^$^G$HH$5H454TG2R"
+current = datetime.datetime.utcnow()
+
 
 def render_str(template, **params):
 	t=jinja_env.get_template(template)
@@ -129,7 +133,7 @@ class Post(ndb.Model):
 
 	def render(self):
 		self._render_text=self.content.replace('\n', '<br>')
-		return render_str("post.html", p=self)
+		return render_str("post.html", p=self, current=current)
 
 
 class Comment(ndb.Model):
@@ -154,8 +158,7 @@ class MainPage(BlogHandler):
     		#Post.query().fetch(keys_only=True)
     		#Comment.query().fetch(keys_only=True)
 		#)
-
-		self.render('front.html', posts=posts)
+		self.render('front.html', posts=posts, current=current)
 
 
 class newPost(BlogHandler):
@@ -188,7 +191,7 @@ class postPage(BlogHandler):
 	def get(self, post_id):
 		key=ndb.Key(Post, int(post_id))
 		post = key.get()
-		self.render("permalink.html", p=post, comments = post.comment)
+		self.render("permalink.html", p=post, comments = post.comment, current=current)
 
 	def post(self, post_id):
 		key=ndb.Key(Post, int(post_id))
@@ -227,7 +230,16 @@ class editPost(BlogHandler):
 	def get(self, post_id):
 		key=ndb.Key(Post, int(post_id))
 		post = key.get()
-		self.render("editpost.html", post=post)
+		if self.user:
+			if self.user.key.id() == post.user.id():
+				self.render("editpost.html", post=post)
+			else:
+				msg="작성자가 아닙니다."
+				self.render("permalink.html", msg=msg, p=post, comments= post.comment, current=current)
+		else:
+			self.redirect("/login")
+
+
 
 	def post(self, post_id):
 		key=ndb.Key(Post, int(post_id))
@@ -250,7 +262,18 @@ class editPost(BlogHandler):
 
 class deletePost(BlogHandler):
 	def get(self, post_id):
-		self.render("deletepost.html")
+		key=ndb.Key(Post, int(post_id))
+		post = key.get()
+		if self.user:
+			if self.user.key.id() == post.user.id():
+				self.render("deletepost.html", post_id=post_id)			
+			else:
+				msg="작성자가 아닙니다."
+				self.render("permalink.html", msg=msg, p=post, comments= post.comment, current=current)
+		else:
+			self.redirect("/login")
+
+
 
 	def post(self, post_id):
 		key=ndb.Key(Post, int(post_id))
@@ -325,6 +348,8 @@ class signup(BlogHandler):
 
 class login(BlogHandler):
 	def get(self):
+		if self.user:
+			self.redirect('/')
 		self.render('login.html')
 
 	def post(self):
@@ -332,7 +357,6 @@ class login(BlogHandler):
 		password = self.request.get('password')
 
 		u = User.login(username, password)
-		self.write(u)
 
 		if u:
 			self.login(u)
@@ -346,6 +370,9 @@ class login(BlogHandler):
 class logout(BlogHandler):
 	def get(self):
 		self.logout()
+		msg="성공적으로 로그아웃 되었습니다."
+		posts = Post.query()
+		posts = posts.order(-Post.created)
 		self.redirect('/')
 
 

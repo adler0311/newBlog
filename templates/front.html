@@ -1,9 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<br>
 	{% for post in posts %}
-		<hr>
-		{{ post.render() | safe}}
+		<div class="post-el">
+			<hr>
+			<div class="subject">
+				<h4><a href="/postpage/{{post.key.id()}}">{{post.subject}}</a></h4>
+				<p id="comment-length">
+					<i class="fa fa-comments" aria-hidden="true"></i>
+					{{post.comment|length}}
+				</p>
+			</div>
+			<div class="content">
+				<h5>{{ post.content[:50] }}{% if post.content|length > 50 %}...{% endif %}</h5>
+			</div>
+			<div class="creatednUser">
+				<ul class="nav">
+					<li><p id="creatednUser-el">
+						{% if post.created.strftime("%Y") == current.strftime("%Y") %}
+							{{post.created.strftime("%m월 %d일 %H시 %M분")}}
+						{% else %}
+							{{post.created.strftime("%Y년 %m월 %d일 %H시 %M분")}}
+						{% endif %}
+						</p></li>
+					<li><p id="creatednUser-el">작성자: {{post.user.get().name}}</p></li>
+				</ul>
+			</div>
+		</div>
 	{% endfor %}
 {% endblock %}
 
