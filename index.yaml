@@ -1,0 +1,6 @@
+indexes:
+- kind: newblog
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc
